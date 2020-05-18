@@ -54,7 +54,7 @@ public class ServletServer {
                     .setDeploymentName("test.war")
                     .addServlets(
                             servlet("MessageServlet", MessageServlet.class)
-                                    .addInitParam("message", "Hello World")
+                                    .addInitParam("message", "Hello World KPN")
                                     .addMapping("/*"),
                             servlet("MyServlet", MessageServlet.class)
                                     .addInitParam("message", "MyServlet")
@@ -69,10 +69,10 @@ public class ServletServer {
                 String directory = System.getenv("HTTPS_KEYSTORE_DIR");
                 char[] password = System.getenv("HTTPS_PASSWORD").toCharArray();
                 File keystore = new File(directory, filename);
-            
+
                 sslContext = createSSLContext(loadKeyStore(keystore, password), password);
             }
-            
+
             HttpHandler servletHandler = manager.start();
             PathHandler path = Handlers.path(Handlers.redirect(MYAPP))
                     .addPrefixPath(MYAPP, servletHandler);
@@ -86,7 +86,7 @@ public class ServletServer {
             throw new RuntimeException(e);
         }
     }
-    
+
     private static KeyStore loadKeyStore(File file, char[] password) throws Exception {
         final InputStream stream = new FileInputStream(file);
         try(InputStream is = stream) {
